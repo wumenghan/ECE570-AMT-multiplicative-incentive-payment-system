@@ -19,9 +19,10 @@ app.config.from_object(__name__)
 app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 
 
-@app.route( _URL_PREFIX + "/", methods=["GET", "POST"])
-def index():
-	return "hello"
+@app.route( _URL_PREFIX + "flags", methods=["GET", "POST"])
+def flags():
+	return render_template("flags.html")
+
 
 if server:
     import flask_hci_server, flask_helpers
