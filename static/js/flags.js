@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});
 
 	var Bonus = React.createClass({
-
+		
 		staticBar:function(fixmeTop){
 			$(window).scroll(function(){
 				var currentScroll = $(window).scrollTop();
@@ -43,6 +43,14 @@ $(document).ready(function(){
 			this.staticBar(fixmeTop);
 		},
 		render: function(){
+			let notification;
+			if(mode=="base"){
+				notification = <div className="bonus-notification" ref="notification"></div>;
+			}else{
+				notification = <div className="bonus-notification" ref="notification">
+						Note: An incorrect answer will make the bonus ZERO, so use the "I'm not sure" option wisely!
+					</div> 
+			}
 			return (
 				<div className="bonus">
 					<div className="bonus-header">
@@ -55,9 +63,7 @@ $(document).ready(function(){
 						If answer of any of these questions are <span className="bonus-red"> WRONG</span>, your bonus will become <span className="bonus-red"> ZERO</span>.<br/>
 						Therefore, for questions you are not sure of, mark the <span className="bonus-blue">I'm not sure</span> option. This does not affect the bonus. </p>
 					</div>
-					<div className="bonus-notification" ref="notification">
-						Note: An incorrect answer will make the bonus ZERO, so use the "I'm not sure" option wisely!
-					</div>
+					{notification}	
 				</div>
 				);
 
@@ -68,7 +74,11 @@ $(document).ready(function(){
 
 		getInitialState:function(){
 			var id = this.props.id;
-			var choice = ["Africa", "Asia/Oceania", "Europe", "Neither of the above", "I'm not sure"];
+			if (mode == "base"){
+				var choice = ["Africa", "Asia/Oceania", "Europe", "Neither of the above"];
+			}else{
+				var choice = ["Africa", "Asia/Oceania", "Europe", "Neither of the above", "I'm not sure"];
+			}
 			return {id:id, choice:choice};
 		},
 		translate: function(input){

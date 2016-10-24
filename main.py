@@ -21,7 +21,8 @@ app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 
 @app.route( _URL_PREFIX + "flags", methods=["GET", "POST"])
 def flags():
-	return render_template("flags.html")
+	mode = str(request.args.get("mode"))
+	return render_template("flags.html", mode=mode)
 
 
 if server:

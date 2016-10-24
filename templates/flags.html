@@ -5,6 +5,9 @@
 
          <!-- Compiled and minified JavaScript for materializecss-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script type="text/javascript">
+        	var mode = "{{mode}}";
+        </script>
         <script type="text/babel" src="{{url_for("static", filename="js/flags.js" )}}"></script>
         <link type="text/css" rel="stylesheet" href="{{url_for("static", filename="css/flags.css")}}">
 {% endblock %}
