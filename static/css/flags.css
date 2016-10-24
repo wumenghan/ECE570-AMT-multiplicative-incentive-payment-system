@@ -1,0 +1,30 @@
+.bonus-blue{
+	color:blue;
+}
+
+.bonus-red{
+	color:red;
+}
+
+.bonus-green{
+	color:green;
+}
+img{
+	width:20em;
+	height:10em;
+	min-width: 10em;
+}
+
+.instruction, .bonus {
+	font-size:1.5em;
+}
+
+.bonus-content, .instruction-content {
+	padding-left:1em;
+}
+
+.bonus-notification{
+	background-color:#ffff8d ;
+	margin:1em;
+	z-index: 1;
+}
