@@ -57,9 +57,9 @@ $(document).ready(function(){
 						<h1>Bonus</h1>
 					</div>
 					<div className="bonus-content">
-						<p>You start with x of bnous. <br/>
+						<p>You start with 5 cents of bonus. <br/>
 						There are some questions whose answers are known to us.<br/>
-						For each of these questions if you answer <span className="bonus-blue"> correctly</span>, your bonus <span className="bonus-blue"> will be DOUBLED</span> (thus, you can earn upto <span className="bonus-green"> upto 50 cents as bonus</span>).<br/>
+						For each of these questions if you answer <span className="bonus-blue"> correctly</span>, your bonus <span className="bonus-blue"> will be DOUBLED</span> (thus, you can earn upto <span className="bonus-green"> upto 40 cents as bonus</span>).<br/>
 						If answer of any of these questions are <span className="bonus-red"> WRONG</span>, your bonus will become <span className="bonus-red"> ZERO</span>.<br/>
 						Therefore, for questions you are not sure of, mark the <span className="bonus-blue">I'm not sure</span> option. This does not affect the bonus. </p>
 					</div>
@@ -145,7 +145,7 @@ $(document).ready(function(){
 					<form method={"get"} action={turkSubmitTo+"/mturk/externalSubmit"}>
 						<Content />
 						<input type={"hidden"} name={"assignmentId"} value={assignmentId} />
-						<input type={"submit"} className="waves-effect waves-light btn" value="submit" style={{float:"right"}}/>
+						<input type={"submit"} id="submit" className="waves-effect waves-light btn" value="submit" style={{float:"right"}}/>
 					</form>
 
 				</div>
@@ -159,7 +159,9 @@ $(document).ready(function(){
 		<Task />,
 		document.getElementById("content")
 	);
-
+	if (assignmentId == "ASSIGNMENT_ID_NOT_AVAILABLE") {
+		$("#submit").prop("disabled", true);
+	}
 
 });
 
