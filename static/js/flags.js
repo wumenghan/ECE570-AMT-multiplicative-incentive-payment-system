@@ -145,6 +145,7 @@ $(document).ready(function(){
 					<form method={"get"} action={turkSubmitTo+"/mturk/externalSubmit"}>
 						<Content />
 						<input type={"hidden"} name={"assignmentId"} value={assignmentId} />
+						<input type={"submit"} className="waves-effect waves-light btn" value="submit" style={{float:"right"}}/>
 					</form>
 
 				</div>

@@ -11,7 +11,7 @@ PORT = 8025
 server = True if socket.gethostname() == "hci.ecn.purdue.edu" else False
 DEBUG = True
 
-_URL_PREFIX = "/%02d"%(PORT%100) if server else "/"
+_URL_PREFIX = "/%02d/"%(PORT%100) if server else "/"
 print _URL_PREFIX
 
 # create application
@@ -21,7 +21,7 @@ app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 
 
 
-@app.route( _URL_PREFIX + "/flags", methods=["GET", "POST"])
+@app.route( _URL_PREFIX + "flags", methods=["GET", "POST"])
 def flags():
 	mode = str(request.args.get("mode"))
 	turkSubmitTo = request.args.get("turkSubmitTo")
