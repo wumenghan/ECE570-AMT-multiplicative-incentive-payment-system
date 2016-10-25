@@ -54,7 +54,7 @@ def main():
 			elif answer_result[gold] == False:
 				wrong +=1
 		if wrong > 0:
-			# no bonus
+			pass
 		else:
 			g_bonus = pow(2, right) * bonus
 			asg.grant_bonus(g_bonus, "Great job")

@@ -22,7 +22,9 @@ app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 @app.route( _URL_PREFIX + "flags", methods=["GET", "POST"])
 def flags():
 	mode = str(request.args.get("mode"))
-	return render_template("flags.html", mode=mode)
+	turkSubmitTo = request.args.get("turkSubmitTo")
+	assignmentId = request.args.get("assignmentId")
+	return render_template("flags.html", mode=mode, turkSubmitTo=turkSubmitTo, assignmentId=assignmentId)
 
 
 if server:

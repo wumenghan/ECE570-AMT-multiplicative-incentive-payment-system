@@ -142,7 +142,11 @@ $(document).ready(function(){
 				<div className="">
 					<Instruction />
 					<Bonus />
-					<Content />
+					<form method="get" action={turkSubmitTo+"/mturk/externalSubmit"}>
+						<Content />
+						<input type="hidden" name="assignmentId" value={assignmentId} />
+					</form>
+
 				</div>
 
 				);
