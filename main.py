@@ -12,6 +12,7 @@ server = True if socket.gethostname() == "hci.ecn.purdue.edu" else False
 DEBUG = True
 
 _URL_PREFIX = "/%02d"%(PORT%100) if server else "/"
+print _URL_PREFIX
 
 # create application
 app = Flask(__name__, static_path=os.path.join(_URL_PREFIX, "static"))
@@ -19,9 +20,14 @@ app.config.from_object(__name__)
 app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 
 
-@app.route( _URL_PREFIX + "/", methods=["GET", "POST"])
-def index():
-	return "hello"
+
+@app.route( _URL_PREFIX + "/flags", methods=["GET", "POST"])
+def flags():
+	mode = str(request.args.get("mode"))
+	turkSubmitTo = request.args.get("turkSubmitTo")
+	assignmentId = request.args.get("assignmentId")
+	return render_template("flags.html", mode=mode, turkSubmitTo=turkSubmitTo, assignmentId=assignmentId)
+
 
 if server:
     import flask_hci_server, flask_helpers

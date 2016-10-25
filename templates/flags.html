@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block front_end_script %}
+        <!-- Compiled and minified CSS for materializecss-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+         <!-- Compiled and minified JavaScript for materializecss-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script type="text/javascript">
+        	var mode = "{{mode}}";
+			var turkSubmitTo = "{{turkSubmitTo}}";
+			var assignmentId = "{{assignmentId}}";
+        </script>
+        <script type="text/babel" src="{{url_for("static", filename="js/flags.js" )}}"></script>
+        <link type="text/css" rel="stylesheet" href="{{url_for("static", filename="css/flags.css")}}">
+{% endblock %}
+
+{% block content %}
+    <div id="content"></div>
+{% endblock %}
