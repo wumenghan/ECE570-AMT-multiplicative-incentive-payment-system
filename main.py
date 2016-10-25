@@ -19,7 +19,7 @@ app.config.from_object(__name__)
 app.config.from_envvar("FLASKER_SETTINGS", silent=True)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route( _URL_PREFIX + "/", methods=["GET", "POST"])
 def index():
 	return "hello"
 
