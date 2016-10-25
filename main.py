@@ -12,7 +12,6 @@ server = True if socket.gethostname() == "hci.ecn.purdue.edu" else False
 DEBUG = True
 
 _URL_PREFIX = "/%02d/"%(PORT%100) if server else "/"
-print _URL_PREFIX
 
 # create application
 app = Flask(__name__, static_path=os.path.join(_URL_PREFIX, "static"))
