@@ -2,6 +2,12 @@ $(document).ready(function(){
 
 	var Instruction = React.createClass({
 		render: function(){
+			let notSure;
+			if (mode=="base"){
+				notSure = <span></span>;
+			}else{
+				notSure = <span>If you are not sure about any answer, plase mark "I'm not sure". </span> ;
+			}
 			return(
 				<div className="instruction">
 					<div className="instruction-header">
@@ -10,7 +16,7 @@ $(document).ready(function(){
 					<div className="instruction-content">
 						<p>There are flags of various countries below. <br/>	 
 							For each flag, mark the continent to which the country belongs.<br/>
-						If you are not sure about any answer, plase mark "I'm not sure".<br/>
+							{notSure} 
 						You <span style={{color:"red"}}>need to mark</span> at least something for every questions, otherwise your work will be <span style={{color:"red"}}>rejected</span>.	</p>
 					</div>
 				</div>
@@ -44,24 +50,28 @@ $(document).ready(function(){
 		},
 		render: function(){
 			let notification;
+			let bonus;
 			if(mode=="base"){
 				notification = <div className="bonus-notification" ref="notification"></div>;
+
 			}else{
 				notification = <div className="bonus-notification" ref="notification">
 						Note: An incorrect answer will make the bonus ZERO, so use the "I'm not sure" option wisely!
 					</div> 
 			}
+
+
 			return (
 				<div className="bonus">
 					<div className="bonus-header">
 						<h1>Bonus</h1>
 					</div>
 					<div className="bonus-content">
-						<p>You start with 5 cents of bonus. <br/>
+						<p>
 						There are some questions whose answers are known to us.<br/>
-						For each of these questions if you answer <span className="bonus-blue"> correctly</span>, your bonus <span className="bonus-blue"> will be DOUBLED</span> (thus, you can earn upto <span className="bonus-green"> upto 40 cents as bonus</span>).<br/>
-						If answer of any of these questions are <span className="bonus-red"> WRONG</span>, your bonus will become <span className="bonus-red"> ZERO</span>.<br/>
-						Therefore, for questions you are not sure of, mark the <span className="bonus-blue">I'm not sure</span> option. This does not affect the bonus. </p>
+						BONUS = 4 * number of questions out of these that you correctly answer <br/>
+						You can earn up to FOURTY CENTS as bonus.
+						</p>
 					</div>
 					{notification}	
 				</div>
@@ -137,6 +147,30 @@ $(document).ready(function(){
 	});
 
 	var Task = React.createClass({
+		getInitialState: function(){
+			var worker_id = (location.search.match(/workerId=(\w+)/)||[])[1];	
+			console.log(worker_id)
+			return {worker_id:worker_id};
+		},
+		componentDidMount: function(){
+			//this.updateWorkerRecord(this.state.worker_id);	
+		},
+		updateWorkerRecord: function(worker_id){
+			console.log(worker_id);
+			$.ajax({
+				url:'./updateWorkerRecord',
+				cache: false,
+				type:'POST',
+				data:{'worker_id':worker_id},
+				success: function(){
+					console.log('update success');
+				}.bind(this),
+				error: function(xhr, status, err){
+					console.log(xhr, status, err)	
+				}.bind(this)
+
+			});	
+		},
 		render: function(){
 			return(
 				<div className="">
@@ -165,4 +199,9 @@ $(document).ready(function(){
 
 });
 
+//						You start with 5 cents of bonus. <br/>
 
+					//	For each of these questions if you answer <span className="bonus-blue"> correctly</span>, your bonus <span className="bonus-blue"> will be DOUBLED</span> (thus, you can earn upto <span className="bonus-green"> upto 40 cents as bonus</span>).<br/>
+					//	If answer of any of these questions are <span className="bonus-red"> WRONG</span>, your bonus will become <span className="bonus-red"> ZERO</span>.<br/>
+
+//						Therefore, for questions you are not sure of, mark the <span className="bonus-blue">I'm not sure</span> option. This does not affect the bonus. 

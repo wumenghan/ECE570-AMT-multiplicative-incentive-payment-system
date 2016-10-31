@@ -1,13 +1,14 @@
 create table
 WORKER(
-	id integer primary key,
+	id integer primary key autoincrement,
 	worker_id text
 );
 
 
 create table 
-RESULTS(
-	id integer primary key,
+RESULT(
+	id integer primary key autoincrement,
 	task_type text,
-	results text
+	results text,
+	time_spent datetime
 );

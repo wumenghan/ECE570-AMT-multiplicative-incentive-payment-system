@@ -1,5 +1,7 @@
 import crowdlib as cl
 import crowdlib_settings
+import sqlite3
+import json
 
 
 class incentivePayment(object):
@@ -11,12 +13,11 @@ class incentivePayment(object):
 		self.gold_standard = gold_standard
 	
 	def answerRight(self):
-		return 
+		pass 
 	def answerWrong(self):
-		return 
-	def payWorker(assignment_id) 
-		return
-
+		pass 
+	def payWorker(assignment_id): 
+		pass
 
 def list_to_dict(list):
 	return_dict = {}
@@ -31,9 +32,9 @@ def strip_text(string):
 def main():
 	gold_standard = ['B', 'C', 'A', 'C', 'A', 'D', 'D', 'B', 'B', 'C', 'B', 'D', 'B', 'B', 'D', 'C', 'C', 'D', 'A', 'B']
 	gold_dict = list_to_dict(gold_standard)
-	bonus = 0.1
+	bonus = 0.05
 	gold_question = [1, 3, 4]
-	hit_id = ""
+	hit_id = "3UYRNV2KITEILMJVJ6IQ5XK57048N7"
 	hit = cl.get_hit(hit_id)
 	asgs = hit.assignments
 	for asg in asgs:
@@ -57,8 +58,14 @@ def main():
 			pass
 		else:
 			g_bonus = pow(2, right) * bonus
-			asg.grant_bonus(g_bonus, "Great job")
-
+#			asg.grant_bonus(g_bonus, "Great job")
+		
+		conn = sqlite3.connect("data.db")
+		db = conn.cursor()
+		answer_result = json.dumps(answer_result)
+		db.execute("insert into result(results, time_spent, task_type) values(?,?,?)", (answer_result,str(asg.time_spent), 'con'))
+		conn.commit()
+		conn.close()
 
 if __name__ == "__main__":
 	main()	
